@@ -5,12 +5,12 @@
   "description": "Pause Instagram and YouTube for 1 minute every 5 minutes.",
   "permissions": ["activeTab", "scripting", "alarms", "storage", "tabs"],
   "background": {
-    "service_worker": "assets/background-CmFgBZSC.js"
+    "service_worker": "assets/background.js"
   },
   "content_scripts": [
     {
       "matches": ["https://www.instagram.com/*", "https://www.youtube.com/*"],
-      "js": ["assets/content-Dxstgqxt.js"]
+      "js": ["assets/content.js"]
     }
   ],
   "action": {

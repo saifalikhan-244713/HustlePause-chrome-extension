@@ -15,23 +15,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "pauseCycle") {
     logWithTimestamp("Alarm triggered: pauseCycle");
     chrome.tabs.query(
-<<<<<<< HEAD
-      { url: ["*://*.instagram.com/*", "*://*.youtube.com/*"] },
-=======
       { url: ["*://*.instagram.com/*", "*://*.youtube.com/*"] }, // Removed `active` filter
->>>>>>> 16c2bfb (alarm precision solved)
       (tabs) => {
         if (tabs.length === 0) {
           logWithTimestamp("No matching tabs found. Skipping.");
           return;
         }
         tabs.forEach((tab) => {
-<<<<<<< HEAD
-          chrome.scripting.executeScript({
-            target: { tabId: tab.id },
-            func: pauseContent,
-          });
-=======
           logWithTimestamp(`Sending pauseContent script to tab ID: ${tab.id}`);
           chrome.scripting.executeScript(
             {
@@ -46,7 +36,6 @@ chrome.alarms.onAlarm.addListener((alarm) => {
               }
             }
           );
->>>>>>> 16c2bfb (alarm precision solved)
         });
       }
     );
@@ -58,9 +47,6 @@ function pauseContent() {
   const overlayId = "pause-overlay";
   const hostname = window.location.hostname;
 
-<<<<<<< HEAD
-  // Pause videos on YouTube
-=======
   console.log(`[${new Date().toISOString()}] Starting pauseContent on ${hostname}.`);
 
   if (document.getElementById(overlayId)) {
@@ -86,7 +72,6 @@ function pauseContent() {
 
   console.log(`[${new Date().toISOString()}] Overlay displayed.`);
 
->>>>>>> 16c2bfb (alarm precision solved)
   if (hostname.includes("youtube.com")) {
     const videos = document.querySelectorAll("video");
     videos.forEach((video) => video.pause());
@@ -106,34 +91,11 @@ function pauseContent() {
     }, pauseDuration);
   }
 
-<<<<<<< HEAD
-  // Show overlay
-  const overlay = document.createElement("div");
-  overlay.id = "pause-overlay";
-  overlay.style.position = "fixed";
-  overlay.style.top = "0";
-  overlay.style.left = "0";
-  overlay.style.width = "100%";
-  overlay.style.height = "100%";
-  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-  overlay.style.color = "white";
-  overlay.style.display = "flex";
-  overlay.style.justifyContent = "center";
-  overlay.style.alignItems = "center";
-  overlay.style.zIndex = "9999";
-  overlay.innerText = "Take a break for 1 minute!";
-  document.body.appendChild(overlay);
-
-  // Remove overlay after pause duration
-  setTimeout(() => {
-    document.body.removeChild(overlay);
-=======
   setTimeout(() => {
     const overlay = document.getElementById(overlayId);
     if (overlay) {
       document.body.removeChild(overlay);
       console.log(`[${new Date().toISOString()}] Overlay removed.`);
     }
->>>>>>> 16c2bfb (alarm precision solved)
   }, pauseDuration);
 }
